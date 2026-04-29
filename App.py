@@ -32,43 +32,31 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Ambil API Key dari Secrets
+# Ambil API Key dari Secrets
 try:
     API_KEY = st.secrets["GEMINI_API_KEY"]
     genai.configure(api_key=API_KEY)
-except Exception as e:
-    st.error("Waduh, API Key belum terpasang di Secrets Streamlit!")
+except:
+    st.error("API Key tidak ditemukan di Secrets!")
 
-# 3. Header Website
-st.title("📝 AI Paraphraser Pro")
-st.markdown("---")
+st.title("📝 AI Paraphraser")
 
-# 4. Input Teks
-user_text = st.text_area("Masukkan Kalimat Asli:", placeholder="Tempel naskah skripsi Anda di sini...", height=200)
+user_text = st.text_area("Masukkan teks:", height=150)
 
-# 5. Pilihan Gaya Bahasa (Horizontal)
-col1, col2 = st.columns(2)
-with col1:
-    mode = st.selectbox("Gaya Bahasa:", ["Akademik (Baku)", "Standar", "Santai"])
-with col2:
-    target = st.selectbox("Tujuan:", ["Munaqasyah", "Publikasi Jurnal", "Tugas Harian"])
-
-# 6. Proses Parafrase
-if st.button("🚀 Mulai Parafrase"):
+if st.button("Proses"):
     if user_text:
-        with st.spinner("Sedang memproses kata-kata..."):
+        with st.spinner("Tunggu sebentar..."):
             try:
+                # Pastikan nama model ini benar
                 model = genai.GenerativeModel("gemini-1.5-flash")
-                prompt = f"Anda adalah editor jurnal ilmiah. Lakukan parafrase pada teks berikut dengan gaya {mode} untuk keperluan {target}. Pastikan kosakata yang dihasilkan variatif, formal, dan mempertahankan makna asli: {user_text}"
-                response = model.generate_content(prompt)
+                response = model.generate_content(f"Parafrase teks ini: {user_text}")
                 
-                st.success("Selesai! Berikut hasilnya:")
+                st.success("Hasil:")
                 st.write(response.text)
-                st.code(response.text, language=None)
             except Exception as e:
                 st.error(f"Error: {e}")
     else:
-        st.warning("Masukkan teks dulu ya!")
+        st.warning("Isi teks dulu!")
 
 st.markdown("---")
 st.caption("Developed by Reno Ryan Saputra | Built with Vibe Coding ⚡")
