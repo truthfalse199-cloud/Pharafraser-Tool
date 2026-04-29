@@ -1,6 +1,21 @@
 import streamlit as st
 import google.generativeai as genai
 
+st.markdown("""
+    <style>
+    .main {
+        background-color: #0e1117;
+    }
+    stButton>button {
+        width: 100%;
+        border-radius: 5px;
+        height: 3em;
+        background-color: #ff4b4b;
+        color: white;
+    }
+    </style>
+    """, unsafe_check_markdown=True)
+
 # Konfigurasi Tampilan Website
 st.set_page_config(page_title="AI Paraphraser", page_icon="📝")
 
