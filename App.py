@@ -1,6 +1,10 @@
 import streamlit as st
 import google.generativeai as genai
 
+
+# Konfigurasi Tampilan Website
+st.set_page_config(page_title="AI Paraphraser", page_icon="📝")
+
 st.markdown("""
     <style>
     .main {
@@ -15,9 +19,6 @@ st.markdown("""
     }
     </style>
     """, unsafe_check_markdown=True)
-
-# Konfigurasi Tampilan Website
-st.set_page_config(page_title="AI Paraphraser", page_icon="📝")
 
 # --- BAGIAN INPUT API KEY ---
 # Nanti kita bisa buat lebih aman, tapi untuk awal, masukkan di sini
