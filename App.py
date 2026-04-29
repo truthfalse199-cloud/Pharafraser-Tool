@@ -48,7 +48,7 @@ if st.button("Proses"):
         with st.spinner("Tunggu sebentar..."):
             try:
                 # Pastikan nama model ini benar
-                model = genai.GenerativeModel("gemini-1.5-flash")
+                model = genai.GenerativeModel("gemini-flash-lite-latest")
                 response = model.generate_content(f"Parafrase teks ini: {user_text}")
                 
                 st.success("Hasil:")
