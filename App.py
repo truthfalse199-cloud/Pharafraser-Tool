@@ -58,7 +58,7 @@ if st.button("🚀 Mulai Parafrase"):
     if user_text:
         with st.spinner("Sedang memproses kata-kata..."):
             try:
-                model = genai.GenerativeModel("gemini-pro")
+                model = genai.GenerativeModel("gemini-1.5-flash")
                 prompt = f"Anda adalah editor jurnal ilmiah. Lakukan parafrase pada teks berikut dengan gaya {mode} untuk keperluan {target}. Pastikan kosakata yang dihasilkan variatif, formal, dan mempertahankan makna asli: {user_text}"
                 response = model.generate_content(prompt)
                 
