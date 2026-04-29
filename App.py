@@ -58,20 +58,15 @@ if st.button("🚀 Mulai Parafrase"):
     if user_text:
         with st.spinner("Sedang memproses kata-kata..."):
             try:
-               model = genai.GenerativeModel("gemini-pro")
-                # Prompt yang lebih spesifik untuk hasil maksimal
+                model = genai.GenerativeModel("gemini-1.5-flash-latest")
                 prompt = f"Anda adalah editor jurnal ilmiah. Lakukan parafrase pada teks berikut dengan gaya {mode} untuk keperluan {target}. Pastikan kosakata yang dihasilkan variatif, formal, dan mempertahankan makna asli: {user_text}"
-                
                 response = model.generate_content(prompt)
                 
                 st.success("Selesai! Berikut hasilnya:")
                 st.write(response.text)
-                
-                # Fitur tambahan: Salin teks (Copy to Clipboard)
                 st.code(response.text, language=None)
-                
             except Exception as e:
-                st.error(f"Error saat menghubungi AI: {e}")
+                st.error(f"Error: {e}")
     else:
         st.warning("Masukkan teks dulu ya!")
 
