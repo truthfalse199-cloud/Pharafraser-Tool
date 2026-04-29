@@ -6,7 +6,7 @@ st.set_page_config(page_title="AI Paraphraser", page_icon="📝")
 
 # --- BAGIAN INPUT API KEY ---
 # Nanti kita bisa buat lebih aman, tapi untuk awal, masukkan di sini
-API_KEY = "AIzaSyCUAfhxX_frJnjSw014iviKNmx0bNaYR8E"
+API_KEY = st.secrets["AIzaSyCUAfhxX_frJnjSw014iviKNmx0bNaYR8E"]
 genai.configure(api_key=API_KEY)
 
 st.title("📝 AI Academic Paraphraser")
