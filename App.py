@@ -84,14 +84,6 @@ st.markdown(f"""
         color: {text_color};
     }}
 
-    /* HAPUS TEKS BAWAH SLIDER */
-    div[data-testid="stTickBar"], 
-    div[data-testid="stTickBar"] > div,
-    .stSlider [data-baseweb="slider"] + div + div {{
-        display: none !important;
-        visibility: hidden !important;
-        height: 0px !important;
-    }}
 
     /* WARNA TRACK SLIDER */
     .stSlider [data-baseweb="slider"] > div > div {{
