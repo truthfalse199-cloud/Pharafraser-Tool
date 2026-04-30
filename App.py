@@ -116,10 +116,7 @@ if level == "Sedang":
     slider_color = "#ffeb3b" # Kuning
 elif level == "Tinggi":
     slider_color = "#4caf50" # Hijau
-    /* Mengubah warna background seluruh aplikasi */
-    .stApp {{
-        background-color: {bg_color};
-        color: {text_color}
+
     
     st.info("""
     **Fitur Utama:**
