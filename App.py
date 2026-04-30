@@ -51,16 +51,20 @@ with col_settings:
         "Ringkas (Padat & Jelas)"
     ])
     
-    # PERBAIKAN: Slider harus didefinisikan SEBELUM variabel slider_color digunakan
-    level = st.select_slider("Intensitas Perubahan:", options=["Rendah", "Sedang", "Tinggi"], value="Rendah")
+   # Buat slider-nya dulu
+level = st.select_slider(
+    "Intensitas Perubahan:", 
+    options=["Rendah", "Sedang", "Tinggi"],
+    value="Rendah"
+)
 
-    # Logika Warna Slider
-    if level == "Rendah":
-        slider_color = "#ff4b4b" # Merah
-    elif level == "Sedang":
-        slider_color = "#ffeb3b" # Kuning
-    elif level == "Tinggi":
-        slider_color = "#4caf50" # Hijau
+# Tentukan warna HANYA berdasarkan level
+if level == "Rendah":
+    slider_color = "#FF4B4B"  # Merah
+elif level == "Sedang":
+    slider_color = "#FFA500"  # Oranye (Lebih jelas dari kuning)
+else:
+    slider_color = "#2E7D32"  # Hijau
 
     st.info("""
     **Fitur Utama:**
@@ -73,29 +77,44 @@ with col_settings:
 # Kita masukkan CSS di sini agar variabel slider_color sudah terisi
 st.markdown(f"""
     <style>
-    /* 1. Background Dasar */
-    .stApp {{
-        background-color: {bg_color};
-        color: {text_color};
+    /* 1. HAPUS TOTAL LABEL BAWAH YANG BER-BACKGROUND */
+    /* Kita hilangkan seluruh kontainer label di bawah slider */
+    div[data-testid="stTickBar"], 
+    div[data-testid="stTickBar"] > div {{
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
     }}
 
-    /* 3. WARNA GARIS SLIDER (TRACK) */
-    /* Bagian Kiri (Aktif) */
+    /* 2. WARNA GARIS (TRACK) SLIDER */
+    /* Bagian kiri (yang sudah dilewati) mengikuti slider_color */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
     }}
     
+    /* Bagian kanan (yang belum dilewati) tetap abu-abu netral */
+    .stSlider [data-baseweb="slider"] > div {{
+        background: rgba(151, 166, 195, 0.25) !important;
+    }}
 
-    /* 4. TITIK SLIDER (THUMB) */
+    /* 3. WARNA TITIK GESER (THUMB) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
         border: 2px solid white !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }}
 
-    /* 6. Perapihan Input Lainnya */
+    /* 4. WARNA TULISAN INDIKATOR DI ATAS TITIK */
+    /* Teks "Rendah", "Sedang", atau "Tinggi" yang ada di atas bulatan */
+    .stSlider div[data-baseweb="slider"] + div {{
+        color: {slider_color} !important;
+        font-weight: bold !important;
+        font-size: 1.1rem !important;
+    }}
+
+    /* 5. WARNA LABEL JUDUL "Intensitas Perubahan" */
     .stWidgetLabel p {{
         color: {text_color} !important;
-        font-weight: bold;
     }}
     </style>
     """, unsafe_allow_html=True)
