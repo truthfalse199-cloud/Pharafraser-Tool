@@ -77,44 +77,53 @@ else:
 # Kita masukkan CSS di sini agar variabel slider_color sudah terisi
 st.markdown(f"""
     <style>
-    /* 1. HAPUS TOTAL LABEL BAWAH YANG BER-BACKGROUND */
-    /* Kita hilangkan seluruh kontainer label di bawah slider */
+    /* 1. Background Dasar */
+    .stApp {{
+        background-color: {bg_color};
+        color: {text_color};
+    }}
+
+    /* 2. SENJATA PAMUNGKAS HAPUS TEKS BAWAH */
+    /* Kita targetkan semua elemen teks (tick) dan kontainernya */
     div[data-testid="stTickBar"], 
-    div[data-testid="stTickBar"] > div {{
+    div[data-testid="stTickBar"] > div,
+    .stSlider [data-baseweb="slider"] + div + div {{
         display: none !important;
         visibility: hidden !important;
         height: 0px !important;
+        margin: 0px !important;
+        padding: 0px !important;
     }}
 
-    /* 2. WARNA GARIS (TRACK) SLIDER */
-    /* Bagian kiri (yang sudah dilewati) mengikuti slider_color */
+    /* 3. WARNA GARIS SLIDER (TRACK) */
+    /* Bagian Kiri (Aktif) */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
     }}
     
-    /* Bagian kanan (yang belum dilewati) tetap abu-abu netral */
+    /* Bagian Kanan (Kosong) */
     .stSlider [data-baseweb="slider"] > div {{
-        background: rgba(151, 166, 195, 0.25) !important;
+        background: rgba(224, 224, 224, 0.5) !important; 
     }}
 
-    /* 3. WARNA TITIK GESER (THUMB) */
+    /* 4. TITIK SLIDER (THUMB) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
         border: 2px solid white !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }}
 
-    /* 4. WARNA TULISAN INDIKATOR DI ATAS TITIK */
-    /* Teks "Rendah", "Sedang", atau "Tinggi" yang ada di atas bulatan */
+    /* 5. TEKS INDIKATOR AKTIF DI ATAS TITIK */
     .stSlider div[data-baseweb="slider"] + div {{
         color: {slider_color} !important;
         font-weight: bold !important;
         font-size: 1.1rem !important;
     }}
 
-    /* 5. WARNA LABEL JUDUL "Intensitas Perubahan" */
+    /* 6. Perapihan Input Lainnya */
     .stWidgetLabel p {{
         color: {text_color} !important;
+        font-weight: bold;
     }}
     </style>
     """, unsafe_allow_html=True)
