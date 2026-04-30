@@ -54,20 +54,22 @@ with col_settings:
             "Ringkas (Padat & Jelas)"
         ])
         
-        level = st.select_slider(
-            "Intensitas Perubahan:", 
-            options=["Rendah", "Sedang", "Tinggi"],
-            value="Sedang"
-        )
+      # Slider Intensitas
+    level = st.select_slider(
+        "Intensitas Perubahan AI:", 
+        options=["Rendah", "Sedang", "Tinggi"],
+        value="Sedang"
+    )
 
-        # Logika Warna Slider
-        if level == "Rendah":
-            slider_color = "#FF4B4B"  # Merah
-        elif level == "Sedang":
-            slider_color = "#FFA500"  # Oranye
-        else:
-            slider_color = "#2E7D32"  # Hijau
+    # Menentukan warna dinamis
+    if level == "Rendah":
+        slider_color = "#FF3B30"  # Merah Apple (Lebih elegan)
+    elif level == "Sedang":
+        slider_color = "#FF9500"  # Oranye Apple
+    else:
+        slider_color = "#34C759"  # Hijau Apple
 
+        
         # Menggunakan expander agar UI tidak terlalu penuh
         with st.expander("📌 Lihat Fitur Utama"):
             st.markdown("""
@@ -83,29 +85,53 @@ st.markdown(f"""
         background-color: {bg_color};
         color: {text_color};
     }}
+/* 1. Hapus teks bawaan yang berantakan di bawah garis */
+    div[data-testid="stTickBar"], 
+    div[data-testid="stTickBar"] > div,
+    .stSlider [data-baseweb="slider"] + div + div {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
+        margin: 0px !important;
+    }
 
-
-    /* WARNA TRACK SLIDER */
-    .stSlider [data-baseweb="slider"] > div > div {{
+    /* 2. Garis Track Slider (Sebelah Kiri Titik) */
+    .stSlider [data-baseweb="slider"] > div > div {
         background: {slider_color} !important;
-    }}
-    .stSlider [data-baseweb="slider"] > div {{
-        background: rgba(150, 150, 150, 0.3) !important; 
-    }}
+        /* Tambahan: Animasi halus saat warna berubah */
+        transition: background 0.4s ease-in-out; 
+    }
+    
+    /* 3. Garis Track Slider (Sebelah Kanan Titik) */
+    .stSlider [data-baseweb="slider"] > div {
+        background: rgba(150, 150, 150, 0.2) !important; 
+        height: 8px !important; /* Buat garis sedikit lebih tebal agar tegas */
+        border-radius: 10px;
+    }
 
-    /* TITIK SLIDER (THUMB) */
-    .stSlider [role="slider"] {{
+    /* 4. Titik Bulatan (Thumb) Slider */
+    .stSlider [role="slider"] {
         background-color: {slider_color} !important;
-        border: 2px solid white !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }}
+        border: 3px solid #ffffff !important; /* Border putih tebal */
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2) !important; /* Efek bayangan 3D */
+        width: 24px !important; /* Diperbesar agar enak disentuh */
+        height: 24px !important;
+        transition: background-color 0.4s ease-in-out, transform 0.2s !important;
+    }
+    
+    /* Efek saat titik slider ditekan/digeser (membesar sedikit) */
+    .stSlider [role="slider"]:active {
+        transform: scale(1.15); 
+    }
 
-    /* TEKS INDIKATOR DI ATAS TITIK */
-    .stSlider div[data-baseweb="slider"] + div {{
+    /* 5. Teks Indikator Aktif (Rendah/Sedang/Tinggi) di atas titik */
+    .stSlider div[data-baseweb="slider"] + div {
         color: {slider_color} !important;
-        font-weight: bold !important;
-        font-size: 1.1rem !important;
-    }}
+        font-weight: 800 !important;
+        font-size: 1.15rem !important;
+        letter-spacing: 0.5px;
+        transition: color 0.4s ease-in-out;
+    }
 
     /* TOMBOL GASS KEUNN PREMIUM */
     .stButton>button {{
