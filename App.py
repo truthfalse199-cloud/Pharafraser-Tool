@@ -146,7 +146,7 @@ if st.button("🚀 Gass Keunn", use_container_width=True):
                 # Konfigurasi AI
                 API_KEY = st.secrets["GEMINI_API_KEY"]
                 genai.configure(api_key=API_KEY)
-                model = genai.GenerativeModel("gemini-1.5-flash-lite-latest")
+                model = genai.GenerativeModel("gemini-flash-lite-latest")
                 
                 refined_prompt = f"""
                 Bertindaklah sebagai Editor Akademik Senior dan Ahli Linguistik. 
