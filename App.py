@@ -52,7 +52,7 @@ with col_settings:
     ])
     
     # PERBAIKAN: Slider harus didefinisikan SEBELUM variabel slider_color digunakan
-    level = st.select_slider("Intensitas Perubahan:", options=["Rendah", "Sedang", "Tinggi"])
+    level = st.select_slider("Intensitas Perubahan:", options=["Rendah", "Sedang", "Tinggi"] value="Rendah")
 
     # Logika Warna Slider
     if level == "Rendah"
