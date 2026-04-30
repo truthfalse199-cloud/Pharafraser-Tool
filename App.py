@@ -26,6 +26,26 @@ else:
 # --- CSS CUSTOM (Termasuk Posisi Ikon di Pojok Kanan) ---
 st.markdown(f"""
    <style>
+   <style>
+    /* Mengubah warna dasar track slider */
+    .stSlider [data-baseweb="slider"] {{
+        background: #e0e0e0;
+        border-radius: 10px;
+    }}
+
+    /* Memberikan warna gradasi pada slider sesuai intensitas */
+    /* Merah (Kiri) -> Kuning (Tengah) -> Hijau (Kanan) */
+    div[data-testid="stSliderTickBar"] {{
+        background: linear-gradient(to right, #ff4b4b 0%, #ffeb3b 50%, #4caf50 100%);
+        height: 5px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }}
+    
+    /* Mengubah warna garis aktif slider */
+    .stSlider [data-testid="stSlider"] {{
+        color: #007bff;
+    }}
     /* Mengubah warna background seluruh aplikasi */
     .stApp {{
         background-color: {bg_color};
