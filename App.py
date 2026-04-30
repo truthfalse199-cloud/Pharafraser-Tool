@@ -27,9 +27,7 @@ else:
 st.markdown(f"""
    <style>
    <style>
-   /* Mengubah warna garis (track) yang sudah dilewati slider */
-    .stSlider [data-baseweb="slider"] > div > div {{
-        background: {slider_color} !important;
+ 
     }}
 
     /* Mengubah warna bulatan (thumb) slider */
