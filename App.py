@@ -85,30 +85,46 @@ st.markdown(f"""
         color: {text_color};
     }}
 
-    /* 1. Hapus teks bawaan yang berantakan di bawah garis */
-    div[data-testid="stTickBar"], 
-    div[data-testid="stTickBar"] > div,
-    .stSlider [data-baseweb="slider"] + div + div {{
+    /* ========================================= */
+    /* 1. SENJATA PAMUNGKAS: HAPUS TICKMARK & TEKS */
+    /* ========================================= */
+    
+    /* Menghapus seluruh kontainer teks (Rendah/Sedang/Tinggi) di bawah slider */
+    div[data-testid="stTickBar"],
+    div[data-testid="stSliderTickBar"] {{
         display: none !important;
-        visibility: hidden !important;
-        height: 0px !important;
-        margin: 0px !important;
     }}
 
-    /* 2. Garis Track Slider (Sebelah Kiri Titik) */
+    /* Menghapus titik-titik penanda (marks) kecil di sepanjang garis slider */
+    .stSlider [data-baseweb="slider"] ul,
+    .stSlider [data-baseweb="slider"] li {{
+        display: none !important;
+    }}
+
+    /* Menutup celah kosong yang ditinggalkan oleh teks di bawah */
+    .stSlider [data-baseweb="slider"] + div + div {{
+        display: none !important;
+    }}
+
+
+    /* ========================================= */
+    /* 2. WARNA TRACK SLIDER & BULATAN (THUMB) */
+    /* ========================================= */
+    
+    /* Garis Kiri (Aktif) */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
         transition: background 0.4s ease-in-out; 
     }}
     
-    /* 3. Garis Track Slider (Sebelah Kanan Titik) */
+    /* Garis Kanan (Kosong) */
     .stSlider [data-baseweb="slider"] > div {{
         background: rgba(150, 150, 150, 0.2) !important; 
         height: 8px !important; 
         border-radius: 10px;
     }}
 
-    /* 4. Titik Bulatan (Thumb) Slider */
+    /* Titik Slider (Thumb) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
         border: 3px solid #ffffff !important; 
@@ -117,13 +133,11 @@ st.markdown(f"""
         height: 24px !important;
         transition: background-color 0.4s ease-in-out, transform 0.2s !important;
     }}
-    
-    /* Efek saat titik slider ditekan/digeser */
-    .stSlider [role="slider"]:active {{
-        transform: scale(1.15); 
-    }}
 
-    /* 5. Teks Indikator Aktif di atas titik */
+    /* ========================================= */
+    /* 3. TEKS INDIKATOR AKTIF DI ATAS TITIK */
+    /* ========================================= */
+    
     .stSlider div[data-baseweb="slider"] + div {{
         color: {slider_color} !important;
         font-weight: 800 !important;
