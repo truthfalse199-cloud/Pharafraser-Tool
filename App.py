@@ -111,7 +111,7 @@ with col_settings:
         "Ringkas (Padat & Jelas)"
     ])
     
-     slider_color = "#ff4b4b" # Default Merah
+slider_color = "#ff4b4b" # Default Merah
 if level == "Sedang":
     slider_color = "#ffeb3b" # Kuning
 elif level == "Tinggi":
