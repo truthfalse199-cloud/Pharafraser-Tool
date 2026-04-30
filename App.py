@@ -25,22 +25,41 @@ else:
 
 # --- CSS CUSTOM (Termasuk Posisi Ikon di Pojok Kanan) ---
 st.markdown(f"""
-    <style>
+   <style>
+    /* Mengubah warna background seluruh aplikasi */
     .stApp {{
         background-color: {bg_color};
         color: {text_color};
     }}
-    .stTextArea textarea {{ border-radius: 10px; }}
-    .stButton>button {{ 
-        width: 100%; border-radius: 8px; height: 3.5em; font-weight: bold; 
-        background-color: #007bff; color: white; border: none;
+    
+    /* MEMPERBAIKI WARNA LABEL (Teks di atas input/slider) */
+    .stWidgetLabel p {{
+        color: {text_color} !important;
+        font-weight: bold;
     }}
-    /* Tombol Floating Ikon di Pojok Kanan Atas */
-    .theme-toggle {{
-        position: fixed;
-        top: 60px;
-        right: 20px;
-        z-index: 999;
+
+    /* MEMPERBAIKI TEKS DI DALAM SELECTBOX */
+    div[data-baseweb="select"] > div {{
+        background-color: {card_bg};
+        color: {text_color};
+    }}
+
+    /* MEMPERBAIKI TEKS DI DALAM TEXT AREA */
+    .stTextArea textarea {{
+        background-color: {card_bg};
+        color: {text_color};
+        border-radius: 10px;
+    }}
+
+    /* TOMBOL PROSES */
+    .stButton>button {{
+        width: 100%;
+        border-radius: 8px;
+        height: 3.5em;
+        font-weight: bold;
+        background-color: #007bff;
+        color: white;
+        border: none;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -62,7 +81,7 @@ except:
     st.error("API Key tidak ditemukan. Pastikan sudah input di menu Secrets!")
 
 # 3. Header
-st.title("📝 AI Academic Paraphraser Pro")
+st.title("📝 Parafrase AI")
 st.write("Gunakan AI untuk menurunkan skor plagiasi dan memperbaiki struktur kalimat secara profesional.")
 st.divider()
 
@@ -73,7 +92,7 @@ with col_input:
     user_text = st.text_area("Teks Asli:", placeholder="Tempel naskah skripsi atau jurnal Anda di sini...", height=300)
 
 with col_settings:
-    st.subheader("⚙️ Konfigurasi Mesin")
+    st.subheader("⚙️ Costum Mode")
     mode = st.selectbox("Gaya Bahasa (Tone):", [
         "Akademik Formal (Standar Jurnal)", 
         "Mode Munaqasyah (Fokus KKO & Baku)", 
@@ -91,9 +110,9 @@ with col_settings:
     """)
 
 # 5. Eksekusi dengan Prompt Baru
-if st.button("🚀 Mulai Parafrase Pro"):
+if st.button("Gass Keunn 🚀"):
     if user_text:
-        with st.spinner("Sedang melakukan rekayasa linguistik..."):
+        with st.spinner("Harap bersabar Bukan Ujian 😝..."):
             try:
                 # Menggunakan model yang sudah berhasil Anda coba sebelumnya
                 model = genai.GenerativeModel("gemini-flash-lite-latest")
@@ -142,4 +161,4 @@ if st.button("🚀 Mulai Parafrase Pro"):
 
 # Footer
 st.divider()
-st.caption("Developed by Reno Ryan Saputra | University of Raden Fatah Palembang")
+st.caption("Developed by Reno Ryan Saputra ❤️")
