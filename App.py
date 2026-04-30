@@ -1,8 +1,8 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. Konfigurasi Tampilan Awal
-st.set_page_config(page_title="AI Paraphraser Pro", page_icon="📝", layout="wide")
+# 1. Konfigurasi Tampilan Awal (Bisa ditambah layout="wide" agar lega)
+st.set_page_config(page_title="AI Paraphraser Pro", page_icon="✨", layout="wide")
 
 # --- LOGIKA DARK/LIGHT MODE ---
 if 'theme' not in st.session_state:
@@ -16,21 +16,21 @@ if st.session_state.theme == 'dark':
     bg_color = "#0f1116"
     text_color = "#ffffff"
     card_bg = "#1d2129"
-    icon = "☀️"
+    icon = "☀️ Mode Terang"
 else:
-    bg_color = "#ffffff"
-    text_color = "#000000"
-    card_bg = "#f0f2f6"
-    icon = "🌙"
+    bg_color = "#f8f9fa" # Abu-abu super muda agar lebih fresh dari putih polos
+    text_color = "#1f2937"
+    card_bg = "#ffffff"
+    icon = "🌙 Mode Gelap"
 
 # --- SIDEBAR / HEADER ---
-st.title("📝 Parafrase AI")
-st.write("Gunakan AI untuk menurunkan skor plagiasi dan memperbaiki struktur kalimat secara profesional.")
-
-# Tombol Ganti Tema (Terletak di pojok kanan)
-col_title, col_theme = st.columns([10, 1])
+col_title, col_theme = st.columns([8, 2])
+with col_title:
+    st.title("✨ AI Paraphraser Pro")
+    st.markdown("**Solusi cerdas menurunkan skor plagiasi & merapikan struktur kalimat.**")
 with col_theme:
-    if st.button(icon):
+    st.write("") # Spacing
+    if st.button(icon, use_container_width=True):
         toggle_theme()
         st.rerun()
 
@@ -40,99 +40,108 @@ st.divider()
 col_input, col_settings = st.columns([2, 1])
 
 with col_input:
-    user_text = st.text_area("Teks Asli:", placeholder="Tempel naskah skripsi atau jurnal Anda di sini...", height=300)
+    user_text = st.text_area("Teks Asli:", placeholder="Tempel naskah skripsi, jurnal, atau artikel Anda di sini...", height=320)
 
 with col_settings:
     st.subheader("⚙️ Custom Mode")
-    mode = st.selectbox("Gaya Bahasa (Tone):", [
-        "Akademik Formal (Standar Jurnal)", 
-        "Mode Munaqasyah (Fokus KKO & Baku)", 
-        "Santai (Artikel Blog)", 
-        "Ringkas (Padat & Jelas)"
-    ])
     
-       # Buat slider-nya dulu
-    level = st.select_slider(
-        "Intensitas Perubahan:", 
-        options=["Rendah", "Sedang", "Tinggi"],
-        value="Rendah"
-    )
-    
-    # Tentukan warna HANYA berdasarkan level
-    if level == "Rendah":
-        slider_color = "#FF4B4B"  # Merah
-    elif level == "Sedang":
-        slider_color = "#FFA500"  # Oranye (Lebih jelas dari kuning)
-    else:
-        slider_color = "#2E7D32"  # Hijau
+    # Bungkus pengaturan dalam kartu (container)
+    with st.container():
+        mode = st.selectbox("Gaya Bahasa (Tone):", [
+            "Akademik Formal (Standar Jurnal)", 
+            "Mode Munaqasyah (Fokus KKO & Baku)", 
+            "Santai (Artikel Blog)", 
+            "Ringkas (Padat & Jelas)"
+        ])
+        
+        level = st.select_slider(
+            "Intensitas Perubahan:", 
+            options=["Rendah", "Sedang", "Tinggi"],
+            value="Sedang"
+        )
 
-    st.info("""
-    **Fitur Utama:**
-    - Anti-AI Detector Tuning
-    - Variasi Sintaksis Radikal
-    - Penurunan Skor Plagiasi
-    """)
+        # Logika Warna Slider
+        if level == "Rendah":
+            slider_color = "#FF4B4B"  # Merah
+        elif level == "Sedang":
+            slider_color = "#FFA500"  # Oranye
+        else:
+            slider_color = "#2E7D32"  # Hijau
+
+        # Menggunakan expander agar UI tidak terlalu penuh
+        with st.expander("📌 Lihat Fitur Utama"):
+            st.markdown("""
+            - 🛡️ **Anti-AI Detector Tuning**
+            - 🔄 **Variasi Sintaksis Radikal**
+            - 📉 **Penurunan Skor Plagiasi**
+            """)
 
 # --- CSS CUSTOM ---
-# Kita masukkan CSS di sini agar variabel slider_color sudah terisi
 st.markdown(f"""
     <style>
-    /* 1. Background Dasar */
     .stApp {{
         background-color: {bg_color};
         color: {text_color};
     }}
 
-    /* 2. SENJATA PAMUNGKAS HAPUS TEKS BAWAH */
-    /* Kita targetkan semua elemen teks (tick) dan kontainernya */
+    /* HAPUS TEKS BAWAH SLIDER */
     div[data-testid="stTickBar"], 
     div[data-testid="stTickBar"] > div,
     .stSlider [data-baseweb="slider"] + div + div {{
         display: none !important;
         visibility: hidden !important;
         height: 0px !important;
-        margin: 0px !important;
-        padding: 0px !important;
     }}
 
-    /* 3. WARNA GARIS SLIDER (TRACK) */
-    /* Bagian Kiri (Aktif) */
+    /* WARNA TRACK SLIDER */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
     }}
-    
-    /* Bagian Kanan (Kosong) */
     .stSlider [data-baseweb="slider"] > div {{
-        background: rgba(224, 224, 224, 0.5) !important; 
+        background: rgba(150, 150, 150, 0.3) !important; 
     }}
 
-    /* 4. TITIK SLIDER (THUMB) */
+    /* TITIK SLIDER (THUMB) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
         border: 2px solid white !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }}
 
-    /* 5. TEKS INDIKATOR AKTIF DI ATAS TITIK */
+    /* TEKS INDIKATOR DI ATAS TITIK */
     .stSlider div[data-baseweb="slider"] + div {{
         color: {slider_color} !important;
         font-weight: bold !important;
         font-size: 1.1rem !important;
     }}
 
-    /* 6. Perapihan Input Lainnya */
-    .stWidgetLabel p {{
-        color: {text_color} !important;
-        font-weight: bold;
+    /* TOMBOL GASS KEUNN PREMIUM */
+    .stButton>button {{
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white !important;
+        border-radius: 12px;
+        border: none;
+        padding: 10px 24px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }}
+    
+    .stButton>button:hover {{
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }}
     </style>
     """, unsafe_allow_html=True)
 
-
 # --- EKSEKUSI ---
-if st.button("Gass Keunn 🚀"):
+# Spasi sedikit sebelum tombol
+st.write("")
+if st.button("🚀 Gass Keunn", use_container_width=True):
     if user_text:
-        with st.spinner("Harap bersabar Bukan Ujian 😝..."):
+        with st.spinner("Meracik kata-kata terbaik untuk Anda... ⏳"):
             try:
                 # Konfigurasi AI
                 API_KEY = st.secrets["GEMINI_API_KEY"]
@@ -155,26 +164,56 @@ if st.button("Gass Keunn 🚀"):
                 
                 response = model.generate_content(refined_prompt)
                 
-                st.divider()
-                st.subheader("📊 Hasil Perbandingan")
-                col_res1, col_res2 = st.columns(2)
+                # Menampilkan notifikasi sukses kecil di pojok
+                st.toast('Selesai! Teks berhasil dioptimasi 🎉', icon='✅')
                 
+                st.divider()
+                st.subheader("📊 Hasil Analisis & Perbandingan")
+                
+                # FITUR BARU: Menghitung jumlah kata
+                word_count_asli = len(user_text.split())
+                word_count_hasil = len(response.text.split())
+                
+                # Menampilkan Metrik
+                col_met1, col_met2, col_met3 = st.columns(3)
+                col_met1.metric(label="Jumlah Kata Asli", value=word_count_asli)
+                col_met2.metric(label="Jumlah Kata Hasil", value=word_count_hasil, delta=word_count_hasil - word_count_asli)
+                col_met3.metric(label="Status Optimasi", value="Aman 🛡️")
+                
+                st.write("---")
+                
+                # Menampilkan Teks
+                col_res1, col_res2 = st.columns(2)
                 with col_res1:
                     st.caption("Teks Asli")
                     st.info(user_text)
-                
                 with col_res2:
                     st.caption("Hasil Optimasi AI")
                     st.success(response.text)
                     
                 st.write("---")
-                st.subheader("📋 Salin Hasil Final:")
-                st.code(response.text, language=None)
+                
+                # FITUR BARU: Tombol Download & Copy
+                col_copy, col_down = st.columns(2)
+                with col_copy:
+                    st.subheader("📋 Salin Hasil:")
+                    st.code(response.text, language=None)
+                with col_down:
+                    st.subheader("💾 Simpan File:")
+                    st.write("Unduh hasil parafrase dalam bentuk file Teks.")
+                    st.download_button(
+                        label="Download Hasil (.txt)",
+                        data=response.text,
+                        file_name="Hasil_Parafrase_AI.txt",
+                        mime="text/plain",
+                        use_container_width=True
+                    )
                 
             except Exception as e:
                 st.error(f"Terjadi kendala teknis: {e}")
     else:
-        st.warning("Silakan masukkan teks terlebih dahulu.")
+        st.warning("Silakan masukkan naskah Anda terlebih dahulu! 📝")
 
+# Footer
 st.divider()
-st.caption("Developed by Reno Ryan Saputra ❤️")
+st.markdown("<p style='text-align: center; color: gray;'>Developed with ❤️ by Reno Ryan Saputra</p>", unsafe_allow_html=True)
