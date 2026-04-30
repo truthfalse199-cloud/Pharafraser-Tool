@@ -72,65 +72,54 @@ with col_settings:
 # Kita masukkan CSS di sini agar variabel slider_color sudah terisi
 st.markdown(f"""
     <style>
-    /* Dasar Aplikasi */
+    /* 1. Mengatur Background Utama */
     .stApp {{
         background-color: {bg_color};
         color: {text_color};
     }}
 
-    /* === PERBAIKAN SLIDER TOTAL === */
-    /* 1. Hilangkan label angka/teks default yang berantakan di bawah */
+    /* 2. MENGHILANGKAN TEKS RENDAH/TINGGI DI BAWAH SLIDER */
+    /* Ini akan menghapus semua label tick di bagian bawah agar bersih */
     div[data-testid="stTickBar"] {{
-        display: none;
+        display: none !important;
     }}
 
-    /* 2. Warna Garis Slider (Track) */
-    .stSlider [data-baseweb="slider"] > div {{
-        background: #e0e0e0; /* Warna garis abu-abu untuk area non-aktif */
-        height: 8px;
-    }}
-
-    /* 3. Warna Garis Aktif (Sebelah kiri bulatan) */
+    /* 3. MENGATUR GARIS SLIDER (TRACK) */
+    /* Bagian yang sudah dilewati (di sebelah kiri titik) */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
     }}
+    
+    /* Bagian yang belum dilewati (di sebelah kanan titik) */
+    .stSlider [data-baseweb="slider"] > div {{
+        background: #e0e0e0 !important; 
+    }}
 
-    /* 4. Warna Bulatan Slider (Thumb) */
+    /* 4. MENGATUR TITIK SLIDER (THUMB) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
-        border: 3px solid white;
-        box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
-        width: 22px;
-        height: 22px;
+        border: 2px solid white !important;
+        height: 20px !important;
+        width: 20px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }}
 
-    /* 5. Warna Teks Indikator di Atas Bulatan */
+    /* 5. TEKS INDIKATOR DI ATAS TITIK */
+    /* Menyesuaikan warna teks yang muncul di atas titik saat digeser */
     .stSlider div[data-baseweb="slider"] + div {{
         color: {slider_color} !important;
-        font-weight: bold;
-        font-size: 1.1rem;
+        font-weight: bold !important;
     }}
 
-    /* === DEKORASI LAINNYA === */
+    /* 6. Perbaikan UI Lainnya agar rapi */
     .stWidgetLabel p {{
         color: {text_color} !important;
-        font-size: 1rem;
-    }}
-
-    .stTextArea textarea {{
-        border: 1px solid #ddd;
-        border-radius: 12px;
-    }}
-
-    .stButton>button {{
-        border-radius: 12px;
-        background: linear-gradient(45deg, #007bff, #0056b3);
-        transition: 0.3s;
+        font-weight: bold;
     }}
     
-    .stButton>button:hover {{
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+    .stTextArea textarea {{
+        border-radius: 12px;
+        border: 1px solid #ccc;
     }}
     </style>
     """, unsafe_allow_html=True)
