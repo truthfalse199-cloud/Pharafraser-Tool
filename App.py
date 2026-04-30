@@ -27,25 +27,26 @@ else:
 st.markdown(f"""
    <style>
    <style>
-    /* Mengubah warna dasar track slider */
-    .stSlider [data-baseweb="slider"] {{
-        background: #e0e0e0;
-        border-radius: 10px;
+   /* Mengubah warna garis (track) yang sudah dilewati slider */
+    .stSlider [data-baseweb="slider"] > div > div {{
+        background: {slider_color} !important;
     }}
 
-    /* Memberikan warna gradasi pada slider sesuai intensitas */
-    /* Merah (Kiri) -> Kuning (Tengah) -> Hijau (Kanan) */
-    div[data-testid="stSliderTickBar"] {{
-        background: linear-gradient(to right, #ff4b4b 0%, #ffeb3b 50%, #4caf50 100%);
-        height: 5px;
-        border-radius: 5px;
-        margin-top: 10px;
+    /* Mengubah warna bulatan (thumb) slider */
+    .stSlider [role="slider"] {{
+        background-color: {slider_color} !important;
+        border: 2px solid {slider_color};
     }}
-    
-    /* Mengubah warna garis aktif slider */
-    .stSlider [data-testid="stSlider"] {{
-        color: #007bff;
+
+    /* Mengubah warna teks label saat digeser */
+    .stSlider [data-testid="stWidgetLabel"] p {{
+        color: {text_color};
     }}
+    slider_color = "#ff4b4b" # Default Merah
+if level == "Sedang":
+    slider_color = "#ffeb3b" # Kuning
+elif level == "Tinggi":
+    slider_color = "#4caf50" # Hijau
     /* Mengubah warna background seluruh aplikasi */
     .stApp {{
         background-color: {bg_color};
