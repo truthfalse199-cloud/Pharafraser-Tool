@@ -85,10 +85,6 @@ st.markdown(f"""
         background: {slider_color} !important;
     }}
     
-    /* Bagian Kanan (Kosong) */
-    .stSlider [data-baseweb="slider"] > div {{
-        background: rgba(224, 224, 224, 0.5) !important; 
-    }}
 
     /* 4. TITIK SLIDER (THUMB) */
     .stSlider [role="slider"] {{
