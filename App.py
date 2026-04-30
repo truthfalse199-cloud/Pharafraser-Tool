@@ -51,20 +51,20 @@ with col_settings:
         "Ringkas (Padat & Jelas)"
     ])
     
-   # Buat slider-nya dulu
-level = st.select_slider(
-    "Intensitas Perubahan:", 
-    options=["Rendah", "Sedang", "Tinggi"],
-    value="Rendah"
-)
-
-# Tentukan warna HANYA berdasarkan level
-if level == "Rendah":
-    slider_color = "#FF4B4B"  # Merah
-elif level == "Sedang":
-    slider_color = "#FFA500"  # Oranye (Lebih jelas dari kuning)
-else:
-    slider_color = "#2E7D32"  # Hijau
+       # Buat slider-nya dulu
+    level = st.select_slider(
+        "Intensitas Perubahan:", 
+        options=["Rendah", "Sedang", "Tinggi"],
+        value="Rendah"
+    )
+    
+    # Tentukan warna HANYA berdasarkan level
+    if level == "Rendah":
+        slider_color = "#FF4B4B"  # Merah
+    elif level == "Sedang":
+        slider_color = "#FFA500"  # Oranye (Lebih jelas dari kuning)
+    else:
+        slider_color = "#2E7D32"  # Hijau
 
     st.info("""
     **Fitur Utama:**
