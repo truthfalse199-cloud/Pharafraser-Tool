@@ -49,7 +49,7 @@ with col_settings:
     with st.container():
         mode = st.selectbox("Gaya Bahasa (Tone):", [
             "Akademik Formal (Standar Jurnal)", 
-            "Mode Munaqasyah (Fokus KKO & Baku)", 
+            "Formal Analitis (Fokus KKO & Baku)", 
             "Santai (Artikel Blog)", 
             "Ringkas (Padat & Jelas)"
         ])
