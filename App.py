@@ -72,47 +72,65 @@ with col_settings:
 # Kita masukkan CSS di sini agar variabel slider_color sudah terisi
 st.markdown(f"""
     <style>
+    /* Dasar Aplikasi */
     .stApp {{
         background-color: {bg_color};
         color: {text_color};
     }}
-    
-    /* Warna Track Slider Aktif */
+
+    /* === PERBAIKAN SLIDER TOTAL === */
+    /* 1. Hilangkan label angka/teks default yang berantakan di bawah */
+    div[data-testid="stTickBar"] {{
+        display: none;
+    }}
+
+    /* 2. Warna Garis Slider (Track) */
+    .stSlider [data-baseweb="slider"] > div {{
+        background: #e0e0e0; /* Warna garis abu-abu untuk area non-aktif */
+        height: 8px;
+    }}
+
+    /* 3. Warna Garis Aktif (Sebelah kiri bulatan) */
     .stSlider [data-baseweb="slider"] > div > div {{
         background: {slider_color} !important;
     }}
 
-    /* Warna Bulatan Slider */
+    /* 4. Warna Bulatan Slider (Thumb) */
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
-        border: 2px solid {slider_color};
+        border: 3px solid white;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+        width: 22px;
+        height: 22px;
     }}
 
-    /* Perbaikan Warna Label & Widget */
+    /* 5. Warna Teks Indikator di Atas Bulatan */
+    .stSlider div[data-baseweb="slider"] + div {{
+        color: {slider_color} !important;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }}
+
+    /* === DEKORASI LAINNYA === */
     .stWidgetLabel p {{
         color: {text_color} !important;
-        font-weight: bold;
-    }}
-
-    div[data-baseweb="select"] > div {{
-        background-color: {card_bg};
-        color: {text_color};
+        font-size: 1rem;
     }}
 
     .stTextArea textarea {{
-        background-color: {card_bg};
-        color: {text_color};
-        border-radius: 10px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
     }}
 
     .stButton>button {{
-        width: 100%;
-        border-radius: 8px;
-        height: 3.5em;
-        font-weight: bold;
-        background-color: #007bff;
-        color: white;
-        border: none;
+        border-radius: 12px;
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        transition: 0.3s;
+    }}
+    
+    .stButton>button:hover {{
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
     }}
     </style>
     """, unsafe_allow_html=True)
