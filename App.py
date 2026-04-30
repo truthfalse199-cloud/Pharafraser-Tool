@@ -55,8 +55,9 @@ with col_settings:
     level = st.select_slider("Intensitas Perubahan:", options=["Rendah", "Sedang", "Tinggi"])
 
     # Logika Warna Slider
-    slider_color = "#ff4b4b" # Merah
-    if level == "Sedang":
+    if level == "Rendah"
+        slider_color = "#ff4b4b" # Merah
+    elif level == "Sedang":
         slider_color = "#ffeb3b" # Kuning
     elif level == "Tinggi":
         slider_color = "#4caf50" # Hijau
