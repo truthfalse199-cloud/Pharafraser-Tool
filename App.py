@@ -42,15 +42,7 @@ st.markdown(f"""
     .stSlider [data-testid="stWidgetLabel"] p {{
         color: {text_color};
     }}
-    slider_color = "#ff4b4b" # Default Merah
-if level == "Sedang":
-    slider_color = "#ffeb3b" # Kuning
-elif level == "Tinggi":
-    slider_color = "#4caf50" # Hijau
-    /* Mengubah warna background seluruh aplikasi */
-    .stApp {{
-        background-color: {bg_color};
-        color: {text_color};
+  
     }}
     
     /* MEMPERBAIKI WARNA LABEL (Teks di atas input/slider) */
@@ -121,7 +113,15 @@ with col_settings:
         "Ringkas (Padat & Jelas)"
     ])
     
-    level = st.select_slider("Intensitas Perubahan:", options=["Rendah", "Sedang", "Tinggi"])
+     slider_color = "#ff4b4b" # Default Merah
+if level == "Sedang":
+    slider_color = "#ffeb3b" # Kuning
+elif level == "Tinggi":
+    slider_color = "#4caf50" # Hijau
+    /* Mengubah warna background seluruh aplikasi */
+    .stApp {{
+        background-color: {bg_color};
+        color: {text_color}])
     
     st.info("""
     **Fitur Utama:**
