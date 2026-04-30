@@ -119,7 +119,7 @@ elif level == "Tinggi":
     /* Mengubah warna background seluruh aplikasi */
     .stApp {{
         background-color: {bg_color};
-        color: {text_color}])
+        color: {text_color}
     
     st.info("""
     **Fitur Utama:**
