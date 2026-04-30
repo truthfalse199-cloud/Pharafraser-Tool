@@ -78,18 +78,6 @@ st.markdown(f"""
         color: {text_color};
     }}
 
-    /* 2. SENJATA PAMUNGKAS HAPUS TEKS BAWAH */
-    /* Kita targetkan semua elemen teks (tick) dan kontainernya */
-    div[data-testid="stTickBar"], 
-    div[data-testid="stTickBar"] > div,
-    .stSlider [data-baseweb="slider"] + div + div {{
-        display: none !important;
-        visibility: hidden !important;
-        height: 0px !important;
-        margin: 0px !important;
-        padding: 0px !important;
-    }}
-
     /* 3. WARNA GARIS SLIDER (TRACK) */
     /* Bagian Kiri (Aktif) */
     .stSlider [data-baseweb="slider"] > div > div {{
