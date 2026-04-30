@@ -6,7 +6,7 @@ st.set_page_config(page_title="AI Paraphraser Pro", page_icon="📝", layout="wi
 
 # --- LOGIKA DARK/LIGHT MODE ---
 if 'theme' not in st.session_state:
-    st.session_state.theme = 'dark'
+    st.session_state.theme = 'light'
 
 def toggle_theme():
     st.session_state.theme = 'light' if st.session_state.theme == 'dark' else 'dark'
