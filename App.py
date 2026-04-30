@@ -90,14 +90,6 @@ st.markdown(f"""
     .stSlider [role="slider"] {{
         background-color: {slider_color} !important;
         border: 2px solid white !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }}
-
-    /* 5. TEKS INDIKATOR AKTIF DI ATAS TITIK */
-    .stSlider div[data-baseweb="slider"] + div {{
-        color: {slider_color} !important;
-        font-weight: bold !important;
-        font-size: 1.1rem !important;
     }}
 
     /* 6. Perapihan Input Lainnya */
