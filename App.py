@@ -67,7 +67,7 @@ with col_settings:
             hue_deg = "0deg"          # Garis tetap merah
         elif level == "Sedang":
             slider_color = "#ffff00"  # Warna teks Oranye
-            hue_deg = "60deg"         # Garis diputar ke oranye
+            hue_deg = "10deg"         # Garis diputar ke oranye
         else:
             slider_color = "#34C759"  # Warna teks Hijau
             hue_deg = "120deg"        # Garis diputar ke hijau
