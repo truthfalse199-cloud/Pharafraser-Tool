@@ -117,7 +117,7 @@ st.markdown(f"""
        melainkan kita "putar" spektrum warnanya secara halus */
  /* Contoh menggabungkan putaran warna dengan peningkat kecerahan */
     .stSlider [data-baseweb="slider"] > div {{
-        filter: hue-rotate brightness(1.5); 
+        filter: hue-rotate({hue_deg}) brightness(1.5); 
         transition: filter 0.4s ease-in-out;
     }}
 
