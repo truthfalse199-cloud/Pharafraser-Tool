@@ -107,24 +107,21 @@ st.markdown(f"""
     }}
 
 
-    /* ========================================= */
+   /* ========================================= */
     /* 2. WARNA TRACK SLIDER & BULATAN (THUMB) */
     /* ========================================= */
     
-   /* 2. Garis Track Slider (Sebelah Kiri Titik) */
-    /* Menargetkan secara brutal semua elemen pembentuk garis aktif */
-    .stSlider [data-baseweb="slider"] > div > div,
-    .stSlider [data-baseweb="slider"] > div > div > div {{
-        background: {slider_color} !important;
-        background-color: {slider_color} !important;
-        transition: background 0.4s ease-in-out, background-color 0.4s ease-in-out; 
-    }}
-    
-    /* Garis Kanan (Kosong) */
-    .stSlider [data-baseweb="slider"] > div {{
+    /* Garis Dasar / Kosong (Sebelah Kanan) */
+    /* Kita buat warnanya abu-abu gelap transparan agar menyatu dengan dark mode */
+    .stSlider [data-baseweb="slider"] > div > div {{
         background: rgba(150, 150, 150, 0.2) !important; 
-        height: 8px !important; 
-        border-radius: 10px;
+    }}
+
+    /* Garis Aktif / Progres (Sebelah Kiri) */
+    /* Kita targetkan secara spesifik HANYA garis progres, bukan bulatannya */
+    .stSlider [data-baseweb="slider"] > div > div > div:not([role="slider"]) {{
+        background: {slider_color} !important;
+        transition: background 0.4s ease-in-out; 
     }}
 
     /* Titik Slider (Thumb) */
@@ -141,10 +138,10 @@ st.markdown(f"""
     /* 3. TEKS INDIKATOR AKTIF DI ATAS TITIK */
     /* ========================================= */
     
-    .stSlider div[data-baseweb="slider"] + div {{
+    /* Memaksa semua teks di dalam area slider (seperti tulisan 'Sedang') mengikuti warna titik */
+    .stSlider [data-baseweb="slider"] * {{
         color: {slider_color} !important;
         font-weight: 800 !important;
-        font-size: 1.15rem !important;
         letter-spacing: 0.5px;
         transition: color 0.4s ease-in-out;
     }}
