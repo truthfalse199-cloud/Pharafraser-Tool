@@ -119,7 +119,7 @@ st.markdown(f"""
     .stSlider [data-baseweb="slider"] > div {{
         filter: hue-rotate(50deg) brightness(1.5); 
         transition: filter 0.4s ease-in-out;
-    }
+    }}
     }}
 
     /* Mempercantik titik bulat (Thumb) */
