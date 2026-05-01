@@ -61,13 +61,16 @@ with col_settings:
             value="Sedang"
         )
 
-        # Menentukan warna dinamis (Spasinya disejajarkan dengan level)
+     # Menentukan warna teks dan pergeseran warna (Hue-Rotate)
         if level == "Rendah":
-            slider_color = "#FF3B30"  # Merah Apple
+            slider_color = "#FF4B4B"  # Warna teks Merah
+            hue_deg = "0deg"          # Garis tetap merah
         elif level == "Sedang":
-            slider_color = "#FF9500"  # Oranye Apple
+            slider_color = "#FF9500"  # Warna teks Oranye
+            hue_deg = "40deg"         # Garis diputar ke oranye
         else:
-            slider_color = "#34C759"  # Hijau Apple
+            slider_color = "#34C759"  # Warna teks Hijau
+            hue_deg = "120deg"        # Garis diputar ke hijau
 
         # Menggunakan expander agar UI tidak terlalu penuh
         with st.expander("📌 Lihat Fitur Utama"):
@@ -107,45 +110,40 @@ st.markdown(f"""
     }}
 
 
-   /* ========================================= */
-    /* 2. WARNA TRACK SLIDER & BULATAN (THUMB) */
+  /* ========================================= */
+    /* 2. TRIK HUE-ROTATE (GARIS & TITIK SUPER RAPI) */
     /* ========================================= */
-    
-    /* Garis Dasar / Kosong (Sebelah Kanan) */
-    /* Kita buat warnanya abu-abu gelap transparan agar menyatu dengan dark mode */
-    .stSlider [data-baseweb="slider"] > div > div {{
-        background: rgba(150, 150, 150, 0.2) !important; 
+    /* Kita tidak menimpa background agar persentase garis tidak bocor, 
+       melainkan kita "putar" spektrum warnanya secara halus */
+    .stSlider [data-baseweb="slider"] > div {{
+        filter: hue-rotate({hue_deg});
+        transition: filter 0.4s ease-in-out;
     }}
 
-    /* Garis Aktif / Progres (Sebelah Kiri) */
-    /* Kita targetkan secara spesifik HANYA garis progres, bukan bulatannya */
-    .stSlider [data-baseweb="slider"] > div > div > div:not([role="slider"]) {{
-        background: {slider_color} !important;
-        transition: background 0.4s ease-in-out; 
-    }}
-
-    /* Titik Slider (Thumb) */
+    /* Mempercantik titik bulat (Thumb) */
     .stSlider [role="slider"] {{
-        background-color: {slider_color} !important;
         border: 3px solid #ffffff !important; 
-        box-shadow: 0 3px 8px rgba(0,0,0,0.2) !important; 
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3) !important; 
         width: 24px !important; 
         height: 24px !important;
-        transition: background-color 0.4s ease-in-out, transform 0.2s !important;
+        transition: transform 0.2s !important;
+        /* Background-color tidak perlu disetting, otomatis ikut hue-rotate parent */
+    }}
+    
+    .stSlider [role="slider"]:active {{
+        transform: scale(1.15); 
     }}
 
     /* ========================================= */
     /* 3. TEKS INDIKATOR AKTIF DI ATAS TITIK */
     /* ========================================= */
-    
-    /* Memaksa semua teks di dalam area slider (seperti tulisan 'Sedang') mengikuti warna titik */
-    .stSlider [data-baseweb="slider"] * {{
+    .stSlider [data-baseweb="slider"] + div{{
         color: {slider_color} !important;
         font-weight: 800 !important;
+        font-size: 1.15rem !important;
         letter-spacing: 0.5px;
         transition: color 0.4s ease-in-out;
     }}
-
     /* TOMBOL GASS KEUNN PREMIUM */
     .stButton>button {{
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
