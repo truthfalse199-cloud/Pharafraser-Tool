@@ -70,7 +70,7 @@ with col_settings:
             hue_deg = "100deg"         # Garis diputar ke oranye
         else:
             slider_color = "#34C759"  # Warna teks Hijau
-            hue_deg = "120deg"        # Garis diputar ke hijau
+            hue_deg = "1800deg"        # Garis diputar ke hijau
 
         # Menggunakan expander agar UI tidak terlalu penuh
         with st.expander("📌 Lihat Fitur Utama"):
