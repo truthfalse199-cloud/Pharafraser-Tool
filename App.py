@@ -189,41 +189,41 @@ if st.button("🚀 Gass Keunn", use_container_width=True):
                 # Perbaikan kecil pada nama model agar pasti jalan
                 model = genai.GenerativeModel("gemini-flash-latest")
                 
-              # 1. LOGIKA PROMPT DINAMIS BERDASARKAN SLIDER
+           # 1. LOGIKA PROMPT DINAMIS BERDASARKAN SLIDER
                 if level == "Rendah":
                     instruksi_level = """
-                    - Lakukan parafrase RINGAN (Word-level paraphrasing). 
-                    - Fokus HANYA pada penggantian sinonim kata. 
-                    - PERTAHANKAN struktur kalimat asli, susunan paragraf, dan panjang teks. 
-                    - Jangan mengubah bentuk aktif-pasif.
+                    - Lakukan parafrase RINGAN. 
+                    - Fokus HANYA pada penggantian sinonim kata dasar (sekitar 20-30% teks). 
+                    - PERTAHANKAN struktur kalimat asli, susunan paragraf, dan panjang teks.
+                    - TUJUAN: Teks persis seperti asli tapi bisa lolos cek plagiasi dasar.
                     """
                 elif level == "Sedang":
                     instruksi_level = """
-                    - Lakukan parafrase MENENGAH (Sentence-level paraphrasing). 
+                    - Lakukan parafrase MENENGAH. 
                     - Ganti sinonim kata dan susun ulang urutan klausa (misal: kalimat aktif menjadi pasif). 
-                    - Teks harus terasa lebih segar untuk menghindari plagiasi dasar, namun kerangka kalimat aslinya masih bisa dikenali.
+                    - TUJUAN: Teks mengalir lebih luwes, enak dibaca, namun kerangka pemikirannya tetap utuh seperti aslinya.
                     """
                 else: # Tinggi
                     instruksi_level = """
-                    - Lakukan parafrase RADIKAL (Deep paraphrasing). 
-                    - Rombak total struktur sintaksis, gabungkan atau pecah kalimat. 
-                    - Tulis ulang seolah-olah ini adalah karya baru dengan tingkat diksi yang lebih tinggi/advanced.
-                    - Pastikan maknanya tetap 100% akurat tanpa terlihat meniru teks asli.
+                    - Lakukan parafrase MENDALAM. 
+                    - Rombak struktur paragraf dan kalimat secara menyeluruh tanpa mengubah makna aslinya. 
+                    - TUJUAN: Teks terlihat seperti ditulis ulang sepenuhnya oleh penulis yang berbeda dengan gaya bahasa yang segar.
                     """
 
-                # 2. MASTER PROMPT
+                # 2. MASTER PROMPT (ANTI SOK PINTAR)
                 refined_prompt = f"""
-                Bertindaklah sebagai Editor Akademik Senior dan Ahli Linguistik. 
+                Bertindaklah sebagai Editor Profesional. 
                 Tugas Anda adalah memparafrase teks di bawah ini dengan gaya bahasa: {mode}.
 
                 TINGKAT INTENSITAS PARAFRASE: {level}
-                INSTRUKSI WAJIB UNTUK INTENSITAS INI:
+                INSTRUKSI UNTUK INTENSITAS INI:
                 {instruksi_level}
 
-                PANDUAN TAMBAHAN (ANTI-AI DETECTOR):
-                1. BURSTINESS: Hindari pola kalimat yang monoton panjang terus atau pendek terus.
-                2. DIKSI ALAMI: Gunakan kosakata kontekstual yang tepat, JANGAN gunakan kata-kata klise AI (seperti: "penting untuk diingat", "oleh karena itu", "dalam kesimpulannya").
-                3. FLOW: Transisi antar kalimat harus natural dan organis seperti tulisan manusia.
+                ATURAN MUTLAK (WAJIB DIPATUHI):
+                1. KETERBACAAN (READABILITY) ADALAH RAJA: Gunakan bahasa Indonesia yang baku, logis, namun TETAP SANGAT MUDAH DIPAHAMI oleh pembaca umum.
+                2. DILARANG MENGGUNAKAN KATA SULIT/FILOSOFIS: Dilarang keras menggunakan istilah yang kaku, aneh, atau jarang dipakai (contoh yang HARUS DIHINDARI: "resiprokal", "orkestrasi", "aksidental", "persistensi", "instrumentasi", "dikotomi"). Gunakan kosakata yang umum dijumpai dalam jurnal penelitian standar.
+                3. ANTI-ROBOTIK: Buat transisi antar kalimat yang mengalir layaknya ditulis oleh manusia. Jangan gunakan kata penghubung klise khas AI (contoh hindari: "penting untuk diingat", "dalam kesimpulannya", "di sisi lain").
+                4. LUGAS DAN PADAT: Jangan bertele-tele atau menambahkan opini baru.
                 
                 Teks Asli: 
                 {user_text}
