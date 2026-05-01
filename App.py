@@ -165,8 +165,12 @@ st.markdown(f"""
         background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }}
 
-    /* 6. Perbaikan Warna Label Widget agar terlihat di semua mode */
-    .stWidgetLabel p {{
+   /* 6. Perbaikan Warna Label Widget (Sapu Jagat) */
+    label, 
+    label p, 
+    label span, 
+    div[data-testid="stWidgetLabel"] p,
+    div[data-testid="stWidgetLabel"] span {{
         color: {text_color} !important;
         font-weight: bold !important;
         transition: color 0.3s ease;
