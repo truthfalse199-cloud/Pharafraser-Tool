@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # 1. Konfigurasi Tampilan Awal
-st.set_page_config(page_title="AI Paraphraser Pro", page_icon="✨", layout="wide")
+st.set_page_config(page_title="Paraphraser Bre AI", page_icon="✨", layout="wide")
 
 # --- LOGIKA DARK/LIGHT MODE ---
 if 'theme' not in st.session_state:
@@ -26,7 +26,7 @@ else:
 # --- SIDEBAR / HEADER ---
 col_title, col_theme = st.columns([8, 2])
 with col_title:
-    st.title("✨ AI Paraphraser Pro")
+    st.title("✨ Paraphraser Bre AI")
     st.markdown("**Solusi cerdas menurunkan skor plagiasi & merapikan struktur kalimat.**")
 with col_theme:
     st.write("") # Spacing
@@ -164,6 +164,13 @@ st.markdown(f"""
         box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }}
+
+    /* 6. Perbaikan Warna Label Widget agar terlihat di semua mode */
+    .stWidgetLabel p {{
+        color: {text_color} !important;
+        font-weight: bold !important;
+        transition: color 0.3s ease;
+    }}
     </style>
     """, unsafe_allow_html=True)
 
@@ -171,7 +178,7 @@ st.markdown(f"""
 st.write("")
 if st.button("🚀 Gass Keunn", use_container_width=True):
     if user_text:
-        with st.spinner("Meracik kata-kata terbaik untuk Anda... ⏳"):
+        with st.spinner("Mohon bersabar bukan ujian... 😝"):
             try:
                 # Konfigurasi AI
                 API_KEY = st.secrets["GEMINI_API_KEY"]
@@ -247,4 +254,4 @@ if st.button("🚀 Gass Keunn", use_container_width=True):
 
 # Footer
 st.divider()
-st.markdown("<p style='text-align: center; color: gray;'>Developed with ❤️ by Reno Ryan Saputra</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>Developed with AI by Reno Ryan Saputra</p>", unsafe_allow_html=True)
