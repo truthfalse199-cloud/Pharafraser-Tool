@@ -14,12 +14,12 @@ def toggle_theme():
 # Penentuan Warna Berdasarkan Tema
 if st.session_state.theme == 'dark':
     bg_color = "#0f1116"
-    text_color = "#1f2937"
+    text_color = "#ffffff"
     card_bg = "#1d2129"
     icon = "☀️ Mode Terang"
 else:
     bg_color = "#f8f9fa" 
-    text_color = "#ffffff"
+    text_color = "#1f2937"
     card_bg = "#ffffff"
     icon = "🌙 Mode Gelap"
 
