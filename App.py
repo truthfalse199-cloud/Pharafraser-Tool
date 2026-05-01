@@ -189,18 +189,44 @@ if st.button("🚀 Gass Keunn", use_container_width=True):
                 # Perbaikan kecil pada nama model agar pasti jalan
                 model = genai.GenerativeModel("gemini-flash-latest")
                 
+              # 1. LOGIKA PROMPT DINAMIS BERDASARKAN SLIDER
+                if level == "Rendah":
+                    instruksi_level = """
+                    - Lakukan parafrase RINGAN (Word-level paraphrasing). 
+                    - Fokus HANYA pada penggantian sinonim kata. 
+                    - PERTAHANKAN struktur kalimat asli, susunan paragraf, dan panjang teks. 
+                    - Jangan mengubah bentuk aktif-pasif.
+                    """
+                elif level == "Sedang":
+                    instruksi_level = """
+                    - Lakukan parafrase MENENGAH (Sentence-level paraphrasing). 
+                    - Ganti sinonim kata dan susun ulang urutan klausa (misal: kalimat aktif menjadi pasif). 
+                    - Teks harus terasa lebih segar untuk menghindari plagiasi dasar, namun kerangka kalimat aslinya masih bisa dikenali.
+                    """
+                else: # Tinggi
+                    instruksi_level = """
+                    - Lakukan parafrase RADIKAL (Deep paraphrasing). 
+                    - Rombak total struktur sintaksis, gabungkan atau pecah kalimat. 
+                    - Tulis ulang seolah-olah ini adalah karya baru dengan tingkat diksi yang lebih tinggi/advanced.
+                    - Pastikan maknanya tetap 100% akurat tanpa terlihat meniru teks asli.
+                    """
+
+                # 2. MASTER PROMPT
                 refined_prompt = f"""
                 Bertindaklah sebagai Editor Akademik Senior dan Ahli Linguistik. 
-                Tugas Anda adalah menulis ulang teks di bawah ini dengan gaya {mode} dan tingkat perubahan {level}.
+                Tugas Anda adalah memparafrase teks di bawah ini dengan gaya bahasa: {mode}.
 
-                TUJUAN UTAMA: Menurunkan skor plagiasi dan melewati deteksi AI Writer dengan cara:
-                1. VARIASI SINTAKSIS: Ubah struktur kalimat secara radikal (aktif-pasif, urutan klausa).
-                2. BURSTINESS: Campurkan kalimat pendek tegas dengan kalimat kompleks mengalir.
-                3. DIKSI SPESIFIK: Gunakan sinonim kontekstual, hindari kata klise AI.
-                4. ANTI-THESIS: Alur organik, tidak robotik.
-                5. HUMAN-LIKE FLOW: Transisi alami.
+                TINGKAT INTENSITAS PARAFRASE: {level}
+                INSTRUKSI WAJIB UNTUK INTENSITAS INI:
+                {instruksi_level}
+
+                PANDUAN TAMBAHAN (ANTI-AI DETECTOR):
+                1. BURSTINESS: Hindari pola kalimat yang monoton panjang terus atau pendek terus.
+                2. DIKSI ALAMI: Gunakan kosakata kontekstual yang tepat, JANGAN gunakan kata-kata klise AI (seperti: "penting untuk diingat", "oleh karena itu", "dalam kesimpulannya").
+                3. FLOW: Transisi antar kalimat harus natural dan organis seperti tulisan manusia.
                 
-                Teks: {user_text}
+                Teks Asli: 
+                {user_text}
                 """
                 
                 response = model.generate_content(refined_prompt)
