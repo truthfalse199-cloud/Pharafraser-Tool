@@ -63,13 +63,10 @@ with col_settings:
 
      # Menentukan warna teks dan pergeseran warna (Hue-Rotate)
         if level == "Rendah":
-            slider_color = "#FF4B4B"  # Warna teks Merah
             hue_deg = "0deg"          # Garis tetap merah
         elif level == "Sedang":
-            slider_color = "#ffff00"  # Warna teks Oranye
             hue_deg = "100deg"         # Garis diputar ke oranye
         else:
-            slider_color = "#34C759"  # Warna teks Hijau
             hue_deg = "1800deg"        # Garis diputar ke hijau
 
         # Menggunakan expander agar UI tidak terlalu penuh
