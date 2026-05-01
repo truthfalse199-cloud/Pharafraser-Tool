@@ -61,13 +61,16 @@ with col_settings:
             value="Sedang"
         )
 
-     # Menentukan warna teks dan pergeseran warna (Hue-Rotate)
+    # Menentukan warna teks dan pergeseran warna (Hue-Rotate)
         if level == "Rendah":
+            slider_color = "#FF4B4B"  # Warna teks Merah
             hue_deg = "0deg"          # Garis tetap merah
         elif level == "Sedang":
-            hue_deg = "100deg"         # Garis diputar ke oranye
+            slider_color = "#FF9500"  # Warna teks Oranye
+            hue_deg = "40deg"         # Garis diputar ke oranye
         else:
-            hue_deg = "1800deg"        # Garis diputar ke hijau
+            slider_color = "#34C759"  # Warna teks Hijau
+            hue_deg = "120deg"        # Garis diputar ke hijau
 
         # Menggunakan expander agar UI tidak terlalu penuh
         with st.expander("📌 Lihat Fitur Utama"):
@@ -112,9 +115,11 @@ st.markdown(f"""
     /* ========================================= */
     /* Kita tidak menimpa background agar persentase garis tidak bocor, 
        melainkan kita "putar" spektrum warnanya secara halus */
+ /* Contoh menggabungkan putaran warna dengan peningkat kecerahan */
     .stSlider [data-baseweb="slider"] > div {{
-        filter: hue-rotate({hue_deg});
+        filter: hue-rotate(50deg) brightness(1.5); 
         transition: filter 0.4s ease-in-out;
+    }
     }}
 
     /* Mempercantik titik bulat (Thumb) */
