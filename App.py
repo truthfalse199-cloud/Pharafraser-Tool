@@ -111,10 +111,13 @@ st.markdown(f"""
     /* 2. WARNA TRACK SLIDER & BULATAN (THUMB) */
     /* ========================================= */
     
-    /* Garis Kiri (Aktif) */
-    .stSlider [data-baseweb="slider"] > div > div {{
+   /* 2. Garis Track Slider (Sebelah Kiri Titik) */
+    /* Menargetkan secara brutal semua elemen pembentuk garis aktif */
+    .stSlider [data-baseweb="slider"] > div > div,
+    .stSlider [data-baseweb="slider"] > div > div > div {{
         background: {slider_color} !important;
-        transition: background 0.4s ease-in-out; 
+        background-color: {slider_color} !important;
+        transition: background 0.4s ease-in-out, background-color 0.4s ease-in-out; 
     }}
     
     /* Garis Kanan (Kosong) */
